@@ -1,0 +1,20 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm install 20
+        - nvm use 20
+        - node -v
+        - npm ci
+    build:
+      commands:
+        - npm run build -- --configuration production
+  artifacts:
+    # 👇 Angular 20 output folder
+    baseDirectory: dist/s3-upload-app/browser
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
